@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Memue GitHub Pages Site',
+    title: 'Security Plus Flashcards',
     description: 'Converts markdown to flashcards sets that can be studied online',
     author: 'nichandy',
   },
@@ -43,8 +43,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `securityplus-flashcards`,
+        short_name: `flashcards`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
