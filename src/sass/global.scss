@@ -3,3 +3,9 @@
 @import './_variables.scss';
 
 @import '~bulma/bulma.sass';
+
+.flashcard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
