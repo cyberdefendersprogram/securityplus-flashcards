@@ -20,18 +20,25 @@ import Card from '../components/card';
  * TODO: Convert the definitions from md into html using remark-rehype and insert in jsx
  * */
 class Flashcard extends Component {
-  static propTypes = {
-    prop: PropTypes,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      flip: false,
+      count: 0,
+      shuffle: props.shuffle,
+      error: '',
+    };
+  }
 
   render() {
-    // const project = data.markdownRemark;
-    const deck = data.flashcards;
-    const { title, section, date } = deck.info;
-    const { cards } = deck;
     return (
       <Layout>
-        <Card />
+        <section className="hero is-info is-large is-fullwidth">
+          <div class="hero-body">
+            <Card />
+          </div>
+        </section>
       </Layout>
     );
   }
