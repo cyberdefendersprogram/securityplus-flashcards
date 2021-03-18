@@ -5,7 +5,7 @@ import { useStaticQuery, graphql } from 'gatsby';
  */
 const useAllFlashcards = () => {
   const data = useStaticQuery(graphql`
-    query Decks {
+    query Flashcards {
       allFlashcards {
         edges {
           node {
