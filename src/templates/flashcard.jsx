@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import SEO from '../components/seo';
 import Layout from '../components/layout';
+import Card from '../components/card';
 
 /**
  * TODO: Create class template for flashcard
