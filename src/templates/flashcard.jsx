@@ -25,8 +25,6 @@ class Flashcard extends Component {
 
     const [deck] = props.data.allFlashcards.edges;
     const { cards, fields, info } = deck.node;
-    console.log({ term: cards[0].term });
-    console.log({ definition: cards[0].definition });
 
     this.state = {
       index: 0,
@@ -46,6 +44,7 @@ class Flashcard extends Component {
       } else {
         if (prevState.index - 1 >= 0) {
           return {
+            isFlipped: !prevState.isFlipped,
             index: prevState.index - 1,
           };
         } else {
@@ -63,6 +62,7 @@ class Flashcard extends Component {
       if (prevState.isFlipped) {
         if (prevState.index + 1 <= prevState.total) {
           return {
+            isFlipped: !prevState.isFlipped,
             index: prevState.index + 1,
           };
         } else {
@@ -107,10 +107,10 @@ class Flashcard extends Component {
   };
 
   render() {
-    const { isFlipped, body, index, total, error } = this.state;
+    const { isFlipped, body, index, total } = this.state;
     const [deck] = this.props.data.allFlashcards.edges;
-    const { cards, fields, info } = deck.node;
-    console.log({ body });
+    const { cards } = deck.node;
+
     return (
       <Layout>
         <section className="hero is-info is-medium is-fullwidth">

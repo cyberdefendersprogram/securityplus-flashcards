@@ -27,7 +27,7 @@ const Card = ({ isFlipped, body }) => {
       <div className="columns is-centered mt-6">
         <div className="column is-half ">
           <div className="card">
-            <div className="card-content has-text-centered">
+            <div className={`card-content ${!isFlipped ? 'has-text-centered' : ''}`}>
               <div className="content">
                 {!isFlipped ? (
                   <p className="is-h1 has-text-dark">{processor.processSync(body).result}</p>
