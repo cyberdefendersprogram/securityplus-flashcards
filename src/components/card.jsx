@@ -21,18 +21,20 @@ const processor = unified()
 /*
  * * Side is necessary since terms and definitions have separate formatting
  */
-const Card = ({ side, body }) => {
+const Card = ({ isFlipped, body }) => {
   return (
     <div className="flashcard">
       <div className="columns is-centered mt-6">
-        <div className="column is-half">
+        <div className="column is-half ">
           <div className="card">
-            <div className="card-content">
-              {side === 'term' ? (
-                <p className="title term">{processor.processSync(body).result}</p>
-              ) : (
-                <div className="definition">{processor.processSync(body).result}</div>
-              )}
+            <div className="card-content has-text-centered">
+              <div className="content">
+                {!isFlipped ? (
+                  <p className="is-h1 has-text-dark">{processor.processSync(body).result}</p>
+                ) : (
+                  <div className="definition">{processor.processSync(body).result}</div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -42,12 +44,12 @@ const Card = ({ side, body }) => {
 };
 
 Card.propTypes = {
-  side: PropTypes.string,
+  isFlipped: PropTypes.bool,
   body: PropTypes.string,
 };
 
 Card.defaultProps = {
-  side: 'term',
+  isFlipped: false,
   body: 'What year was the movie JAWS released?',
 };
 

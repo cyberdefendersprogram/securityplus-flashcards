@@ -22,27 +22,122 @@ import CardCount from '../components/cardCount';
 class Flashcard extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
-    const data = props.data;
-    console.log(data);
+
+    const [deck] = props.data.allFlashcards.edges;
+    const { cards, fields, info } = deck.node;
+    console.log({ term: cards[0].term });
+    console.log({ definition: cards[0].definition });
 
     this.state = {
-      side: 'term',
-      count: 1,
-      body: '',
+      index: 0,
+      total: cards.length,
+      isFlipped: false,
       error: '',
     };
   }
 
+  onPrevCard = () => {
+    this.setState((prevState) => {
+      console.log({ index: prevState.index - 1 });
+      if (prevState.isFlipped) {
+        return {
+          isFlipped: !prevState.isFlipped,
+        };
+      } else {
+        if (prevState.index - 1 >= 0) {
+          return {
+            index: prevState.index - 1,
+          };
+        } else {
+          return {
+            index: prevState.index,
+          };
+        }
+      }
+    });
+  };
+
+  onNextCard = () => {
+    this.setState((prevState) => {
+      console.log({ index: prevState.index + 1 });
+      if (prevState.isFlipped) {
+        if (prevState.index + 1 <= prevState.total) {
+          return {
+            index: prevState.index + 1,
+          };
+        } else {
+          return {
+            index: prevState.index,
+          };
+        }
+      } else {
+        return {
+          isFlipped: !prevState.isFlipped,
+        };
+      }
+    });
+  };
+
+  onFlipCard = () => {
+    this.setState((prevState) => {
+      console.log(!prevState.isFlipped);
+      return {
+        isFlipped: !prevState.isFlipped,
+      };
+    });
+  };
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    if (!this.state.description || !this.state.amount) {
+      this.setState(() => ({
+        error: 'Please provide description and amount',
+      }));
+    } else {
+      this.setState(() => ({
+        error: '',
+      }));
+      this.props.onSubmit({
+        description: this.state.description,
+        amount: parseFloat(this.state.amount, 10) * 100,
+        createdAt: this.state.createdAt.valueOf(),
+        note: this.state.note,
+      });
+    }
+  };
+
   render() {
-    const { side, body, count, error } = this.state;
+    const { isFlipped, body, index, total, error } = this.state;
+    const [deck] = this.props.data.allFlashcards.edges;
+    const { cards, fields, info } = deck.node;
+    console.log({ body });
     return (
       <Layout>
         <section className="hero is-info is-medium is-fullwidth">
           <div className="hero-body">
             <div className="title has-text-centered">Name of Deck</div>
-            <Card side={this.state.side} body={this.state.body} current={this.state.count} />
-            <CardCount current={this.state.count} />
+            <div onClick={this.onFlipCard}>
+              {!isFlipped ? (
+                <Card isFlipped={isFlipped} body={`# ${cards[index].term}`} />
+              ) : (
+                <Card isFlipped={isFlipped} body={cards[index].definition} />
+              )}
+            </div>
+            <CardCount current={index} total={total} />
+            <div className="container">
+              <div className="columns is-centered">
+                <div className="column is-one-fifth has-text-centered">
+                  <button className="button is-medium" onClick={this.onPrevCard}>
+                    Prev
+                  </button>
+                </div>
+                <div className="column is-one-fifth has-text-centered">
+                  <button className="button is-medium" onClick={this.onNextCard}>
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </Layout>
