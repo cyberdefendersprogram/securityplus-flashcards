@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const DeckListItem = ({ title, date, section, pageLink }) => {
   // Use title to create flashcard page handle
   return (
-    <div className="column is-full">
+    <div className="column is-four-fifths">
       <div className="card">
         <Link to={pageLink}>
           <header className="card-header is-flex">

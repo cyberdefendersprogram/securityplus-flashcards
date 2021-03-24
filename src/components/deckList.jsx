@@ -20,11 +20,11 @@ const DeckList = ({ decks }) => {
 };
 
 DeckList.propTypes = {
-  projects: PropTypes.arrayOf(PropTypes.object),
+  decks: PropTypes.arrayOf(PropTypes.object),
 };
 
 DeckList.defaultProps = {
-  projects: [{}],
+  decks: [{}],
 };
 
 export default DeckList;
