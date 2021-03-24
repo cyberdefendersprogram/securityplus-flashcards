@@ -36,18 +36,19 @@ class Flashcard extends Component {
 
   onPrevCard = () => {
     this.setState((prevState) => {
-      console.log({ index: prevState.index - 1 });
       if (prevState.isFlipped) {
         return {
           isFlipped: !prevState.isFlipped,
         };
       } else {
         if (prevState.index - 1 >= 0) {
+          console.log({ index: prevState.index - 1 });
           return {
             isFlipped: !prevState.isFlipped,
             index: prevState.index - 1,
           };
         } else {
+          console.log({ index: prevState.index });
           return {
             index: prevState.index,
           };
@@ -58,14 +59,15 @@ class Flashcard extends Component {
 
   onNextCard = () => {
     this.setState((prevState) => {
-      console.log({ index: prevState.index + 1 });
       if (prevState.isFlipped) {
         if (prevState.index + 1 <= prevState.total) {
+          console.log({ index: prevState.index + 1 });
           return {
             isFlipped: !prevState.isFlipped,
             index: prevState.index + 1,
           };
         } else {
+          console.log({ index: prevState.index });
           return {
             index: prevState.index,
           };
@@ -123,7 +125,7 @@ class Flashcard extends Component {
                 <Card isFlipped={isFlipped} body={cards[index].definition} />
               )}
             </div>
-            <CardCount current={index} total={total} />
+            <CardCount current={index + 1} total={total} />
             <div className="container">
               <div className="columns is-centered">
                 <div className="column is-one-fifth has-text-centered">
