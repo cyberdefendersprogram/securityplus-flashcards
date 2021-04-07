@@ -1,0 +1,166 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #E3F2FD;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='126' height='84' viewBox='0 0 126 84'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M126 83v1H0v-2h40V42H0v-2h40V0h2v40h40V0h2v40h40V0h2v83zm-2-1V42H84v40h40zM82 42H42v40h40V42zm-50-6a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm96 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm-42 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm30-12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM20 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 24a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm54 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM50 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM50 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm54-12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM92 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM92 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24-42a4 4 0 1 1 0-8 4 4 0 0 1 0 8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  overflow: hidden;
+  font-family: Montserrat, sans-serif;
+}
+
+.deck {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.loaded.deck {
+  opacity: 1;
+}
+
+.deck_love .fa-heart {
+  opacity: 0.7;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.deck_nope .fa-remove {
+  opacity: 0.7;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.deck--cards {
+  flex-grow: 1;
+  padding-bottom: 40px;
+  text-align: center;
+  vertical-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 1;
+}
+
+.deck--card {
+  display: inline-block;
+  width: 90vw;
+  max-width: 600px;
+  height: 75vh;
+  background: #ffffff;
+  padding-bottom: 0px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: absolute;
+  will-change: transform;
+  transition: all 0.3s ease-in-out;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.moving.deck--card {
+  transition: none;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.deck--card img {
+  max-width: 100%;
+  pointer-events: none;
+}
+
+.deck--card h3 {
+  margin-top: 32px;
+  font-size: 32px;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.deck--card p {
+  margin-top: 24px;
+  font-size: 20px;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+/* This container is needed to position the front and back side */
+.deck--card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Position the front and back side */
+.deck--card-front, .deck--card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.deck--card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* Style the back side */
+.deck--card-back {
+  background-color: grey;
+  color: white;
+  text-align: center;
+  transform: rotateY(180deg);
+}
+
+.deck--buttons {
+  flex: 0 0 100px;
+  text-align: center;
+  padding-top: 40px;
+}
+
+/* For phones */
+@media screen and (max-width: 600px) {
+  .deck--buttons {
+    padding-top: 10px;
+  }
+}
+
+.deck--buttons button {
+  border-radius: 50%;
+  line-height: 60px;
+  width: 60px;
+  border: 0;
+  background: #ffffff;
+  display: inline-block;
+  margin: 0 8px;
+}
+
+.deck--buttons button:focus {
+  outline: 0;
+}
+
+.deck--buttons i {
+  font-size: 32px;
+  vertical-align: middle;
+}
+
+.fa-check {
+  color: #fface4;
+}
+
+.fa-undo {
+  color: #cdd6dd;
+}
